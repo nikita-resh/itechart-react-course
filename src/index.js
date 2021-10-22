@@ -1,9 +1,108 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ViewComfyIcon from "@mui/icons-material/ViewComfy";
+import { AppBar, Toolbar, Typography, Card, CardContent } from "@mui/material";
+import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+const cardStyles = {
+  maxWidth: 300,
+  mt: 2,
+  mr: 2,
+  border: 1,
+  borderColor: "#999999",
+  display: "inline-block",
+};
+
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <AppBar position="relative">
+        <Toolbar>
+          <ViewComfyIcon fontSize="large" sx={{ mr: 2 }} />
+          <Typography variant="h4" component="h1">
+            iTechArt react course
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Card sx={cardStyles}>
+        <CardContent>
+          <Typography
+            variant="span"
+            component="h2"
+            sx={{ fontSize: 18 }}
+            fontFamily="Roboto"
+          >
+            Card 1
+          </Typography>
+          <Typography
+            component="div"
+            sx={{ fontSize: 14, mt: 1 }}
+            fontFamily="Roboto"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
+            veritatis est iure adipisci, autem dignissimos totam inventore
+            praesentium, ad deserunt quidem ut. Nemo qui incidunt porro rerum.
+            Odit, distinctio incidunt.
+          </Typography>
+        </CardContent>
+      </Card>
+      <Card sx={cardStyles}>
+        <CardContent>
+          <Typography
+            variant="span"
+            component="h2"
+            sx={{ fontSize: 18 }}
+            fontFamily="Roboto"
+          >
+            Card 2
+          </Typography>
+          <Typography
+            component="div"
+            sx={{ fontSize: 14, mt: 1 }}
+            fontFamily="Roboto"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
+            tenetur magni neque maxime, quidem magnam autem velit repudiandae
+            illo? Sit ullam eaque tempora ipsum odit dolorum id accusantium
+            suscipit deserunt?
+          </Typography>
+        </CardContent>
+      </Card>
+      <Card sx={cardStyles}>
+        <CardContent>
+          <Typography
+            variant="span"
+            component="h2"
+            sx={{ fontSize: 18 }}
+            fontFamily="Roboto"
+          >
+            Card 3
+          </Typography>
+          <Typography
+            component="div"
+            sx={{ fontSize: 14, mt: 1 }}
+            fontFamily="Roboto"
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
+            at dolor eveniet, deleniti animi molestias aliquid minus natus
+            consequatur obcaecati nihil, ad repellendus eos minima sint iste
+            tempore expedita delectus!
+          </Typography>
+        </CardContent>
+      </Card>
+    </ThemeProvider>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <h1>itechart-react-course</h1>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

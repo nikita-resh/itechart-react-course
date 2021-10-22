@@ -2,10 +2,26 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ViewComfyIcon from "@mui/icons-material/ViewComfy";
 import { AppBar, Toolbar, Typography, Card, CardContent } from "@mui/material";
+import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+const cardStyles = {
+  maxWidth: 300,
+  mt: 2,
+  mr: 2,
+  border: 1,
+  borderColor: "#999999",
+  display: "inline-block",
+};
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <AppBar position="relative">
         <Toolbar>
           <ViewComfyIcon fontSize="large" sx={{ mr: 2 }} />
@@ -14,22 +30,12 @@ const App = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Card
-        sx={{
-          maxWidth: 300,
-          mt: 2,
-          mr: 2,
-          border: 1,
-          borderColor: "#999999",
-          display: "inline-block",
-        }}
-      >
+      <Card sx={cardStyles}>
         <CardContent>
           <Typography
             variant="span"
             component="h2"
             sx={{ fontSize: 18 }}
-            color="text.secondary"
             fontFamily="Roboto"
           >
             Card 1
@@ -37,7 +43,6 @@ const App = () => {
           <Typography
             component="div"
             sx={{ fontSize: 14, mt: 1 }}
-            color="text.secondary"
             fontFamily="Roboto"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
@@ -47,22 +52,12 @@ const App = () => {
           </Typography>
         </CardContent>
       </Card>
-      <Card
-        sx={{
-          maxWidth: 300,
-          mt: 2,
-          mr: 2,
-          border: 1,
-          borderColor: "#999999",
-          display: "inline-block",
-        }}
-      >
+      <Card sx={cardStyles}>
         <CardContent>
           <Typography
             variant="span"
             component="h2"
             sx={{ fontSize: 18 }}
-            color="text.secondary"
             fontFamily="Roboto"
           >
             Card 2
@@ -70,7 +65,6 @@ const App = () => {
           <Typography
             component="div"
             sx={{ fontSize: 14, mt: 1 }}
-            color="text.secondary"
             fontFamily="Roboto"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
@@ -80,21 +74,12 @@ const App = () => {
           </Typography>
         </CardContent>
       </Card>
-      <Card
-        sx={{
-          maxWidth: 300,
-          mt: 2,
-          border: 1,
-          borderColor: "#999999",
-          display: "inline-block",
-        }}
-      >
+      <Card sx={cardStyles}>
         <CardContent>
           <Typography
             variant="span"
             component="h2"
             sx={{ fontSize: 18 }}
-            color="text.secondary"
             fontFamily="Roboto"
           >
             Card 3
@@ -102,7 +87,6 @@ const App = () => {
           <Typography
             component="div"
             sx={{ fontSize: 14, mt: 1 }}
-            color="text.secondary"
             fontFamily="Roboto"
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
@@ -112,7 +96,7 @@ const App = () => {
           </Typography>
         </CardContent>
       </Card>
-    </>
+    </ThemeProvider>
   );
 };
 

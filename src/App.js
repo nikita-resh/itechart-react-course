@@ -1,10 +1,10 @@
 import React from "react";
-import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Header from "./components/Header/Header";
 import Cards from "./states/Cards/Cards";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     mode: "dark",
   },

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Card from "../../components/Card/Card";
 
 const Cards = () => {
-  const cardList = useState([
+  const [cardList] = useState([
     {
       id: 1,
       title: "Card 1",
@@ -19,7 +19,7 @@ const Cards = () => {
       title: "Card 3",
       text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam at dolor eveniet, deleniti animi molestias aliquid minus natus consequatur obcaecati nihil, ad repellendus eos minima sint iste tempore expedita delectus!",
     },
-  ])[0];
+  ]);
 
   return (
     <>

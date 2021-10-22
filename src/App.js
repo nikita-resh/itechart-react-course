@@ -1,6 +1,5 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 import Header from "./components/Header/Header";
 import Cards from "./states/Cards/Cards";
 

@@ -2,7 +2,8 @@ import React from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 
 const cardStyles = {
-  maxWidth: 300,
+  width: 300,
+  height: 200,
   mt: 2,
   mr: 2,
   border: 1,

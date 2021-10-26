@@ -17,10 +17,12 @@ const AddCardStyles = {
   },
 };
 
+const iconStyles = { width: 80, height: 80 };
+
 const AddCard = ({ handleClickOpen }) => {
   return (
     <Button sx={AddCardStyles} onClick={handleClickOpen}>
-      <ControlPointIcon sx={{ width: 80, height: 80 }} />
+      <ControlPointIcon sx={iconStyles} />
     </Button>
   );
 };

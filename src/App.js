@@ -15,7 +15,6 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOpen = () => {
-    console.log("Click");
     setIsOpen(true);
   };
 

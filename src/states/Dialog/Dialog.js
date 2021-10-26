@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Dialog, DialogTitle, TextField, Button } from "@mui/material";
 
-const CustomDialog = ({ open, handleClose, cardList, setCardList }) => {
+const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isFilled, setIsFilled] = useState(false);
   const AddCard = () => {
+    setTitle("");
+    setContent("");
     setCardList([
       ...cardList,
       { id: cardList.length + 1, title, text: content },
     ]);
-    setTitle("");
-    setContent("");
     handleClose();
   };
-  const [isFilled, setIsFilled] = useState(false);
 
   useEffect(() => {
     if (title === "" || content === "") {
@@ -23,8 +23,13 @@ const CustomDialog = ({ open, handleClose, cardList, setCardList }) => {
     }
   }, [title, content]);
 
+  useEffect(() => {
+    setTitle("");
+    setContent("");
+  }, [isOpen]);
+
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={isOpen} onClose={handleClose}>
       <DialogTitle>Add new card</DialogTitle>
       <TextField
         id="outlined-basic"

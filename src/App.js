@@ -12,15 +12,15 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const [open, setOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOpen = () => {
     console.log("Click");
-    setOpen(true);
+    setIsOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
 
   const [cardList, setCardList] = useState([
@@ -48,7 +48,7 @@ const App = () => {
       <AddCard handleClickOpen={handleClickOpen} />
       <Dialog
         handleClose={handleClose}
-        open={open}
+        isOpen={isOpen}
         cardList={cardList}
         setCardList={setCardList}
       />

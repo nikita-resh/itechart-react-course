@@ -5,18 +5,23 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isFilled, setIsFilled] = useState(false);
-  const AddCard = () => {
+
+  const cleanForm = () => {
     setTitle("");
     setContent("");
+  };
+
+  const addCard = () => {
     setCardList([
       ...cardList,
       { id: cardList.length + 1, title, text: content },
     ]);
+    cleanForm();
     handleClose();
   };
 
   useEffect(() => {
-    if (title === "" || content === "") {
+    if (!title.trim() || !content.trim()) {
       setIsFilled(false);
     } else {
       setIsFilled(true);
@@ -24,8 +29,7 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   }, [title, content]);
 
   useEffect(() => {
-    setTitle("");
-    setContent("");
+    cleanForm();
   }, [isOpen]);
 
   return (
@@ -51,7 +55,7 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
       <Button
         variant="outlined"
         sx={{ maxWidth: 100, m: 1 }}
-        onClick={AddCard}
+        onClick={addCard}
         disabled={!isFilled}
       >
         Add

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { Dialog, DialogTitle, TextField, Button } from "@mui/material";
 
 const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
@@ -12,10 +13,7 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   };
 
   const addCard = () => {
-    setCardList([
-      ...cardList,
-      { id: cardList.length + 1, title, text: content },
-    ]);
+    setCardList([...cardList, { id: uuidv4(), title, text: content }]);
     cleanForm();
     handleClose();
   };

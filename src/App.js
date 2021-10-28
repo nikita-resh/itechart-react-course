@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Cards from "./states/Cards/Cards";
 import AddCard from "./components/AddCard/AddCard";
 import Dialog from "./states/Dialog/Dialog";
+import EditDialog from "./states/EditDialog/EditDialog";
 
 const theme = createTheme({
   palette: {
@@ -13,14 +14,20 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isCreateModeOpen, setIsCreateModeOpen] = useState(false);
+  const [isEditModeOpen, setIsEditModeOpen] = useState(false);
+  const [selected, setSelected] = useState(null);
 
-  const handleClickOpen = () => {
-    setIsOpen(true);
+  const handleClickOpen = (set) => {
+    return function () {
+      set(true);
+    };
   };
 
-  const handleClose = () => {
-    setIsOpen(false);
+  const handleClose = (set) => {
+    return function () {
+      set(false);
+    };
   };
 
   const [cardList, setCardList] = useState([
@@ -44,13 +51,23 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Cards cardList={cardList} />
-      <AddCard handleClickOpen={handleClickOpen} />
+      <Cards
+        cardList={cardList}
+        editMode={handleClickOpen(setIsEditModeOpen)}
+        setSelected={setSelected}
+      />
+      <AddCard handleClickOpen={handleClickOpen(setIsCreateModeOpen)} />
       <Dialog
-        handleClose={handleClose}
-        isOpen={isOpen}
+        handleClose={handleClose(setIsCreateModeOpen)}
+        isOpen={isCreateModeOpen}
         cardList={cardList}
         setCardList={setCardList}
+      />
+      <EditDialog
+        isOpen={isEditModeOpen}
+        handleClose={handleClose(setIsEditModeOpen)}
+        selected={selected}
+        cardList={cardList}
       />
     </ThemeProvider>
   );

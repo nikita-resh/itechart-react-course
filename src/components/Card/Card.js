@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography, IconButton } from "@mui/material";
-import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material/";
+import { Edit as EditIcon } from "@mui/icons-material/";
 import "./Card.scss";
 
 const cardStyles = {
@@ -14,7 +14,7 @@ const cardStyles = {
   display: "inline-block",
 };
 
-const CustomCard = ({ cardTitle, cardText }) => {
+const CustomCard = ({ cardTitle, cardText, editMode, setSelected, cardId }) => {
   return (
     <Card sx={cardStyles} className="card">
       <CardContent>
@@ -33,14 +33,17 @@ const CustomCard = ({ cardTitle, cardText }) => {
         >
           {cardText}
         </Typography>
-        <div className="buttons">
-          <IconButton aria-label="delete" className="icon-btn">
-            <DeleteIcon />
-          </IconButton>
-          <IconButton aria-label="edit" className="icon-btn">
-            <EditIcon />
-          </IconButton>
-        </div>
+
+        <IconButton
+          aria-label="edit"
+          className="button"
+          onClick={() => {
+            editMode();
+            setSelected(cardId);
+          }}
+        >
+          <EditIcon />
+        </IconButton>
       </CardContent>
     </Card>
   );

@@ -1,11 +1,18 @@
 import React from "react";
 import Card from "../../components/Card/Card";
 
-const Cards = ({ cardList }) => {
+const Cards = ({ cardList, editMode, setSelected }) => {
   return (
     <>
       {cardList.map((card) => (
-        <Card cardTitle={card.title} cardText={card.text} key={card.id} />
+        <Card
+          cardTitle={card.title}
+          cardText={card.text}
+          key={card.id}
+          cardId={card.id}
+          editMode={editMode}
+          setSelected={setSelected}
+        />
       ))}
     </>
   );

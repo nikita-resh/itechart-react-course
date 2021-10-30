@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dialog, DialogTitle, TextField, Button } from "@mui/material";
 
 const EditDialog = ({ isOpen, handleClose, cardList, selected }) => {
-  const card = cardList.find((item) => item.id === selected);
+  const card = {
+    title: "",
+    text: "",
+  };
+
+  const [currentTitle, setCurrentTitle] = useState("");
+  const [currentText, setCurrentText] = useState("");
+
+  useEffect(() => {
+    setCurrentTitle(cardList.find((item) => item.id === selected)?.title);
+  }, [selected, cardList]);
+
+  useEffect(() => {
+    setCurrentText(cardList.find((item) => item.id === selected)?.text);
+  }, [selected, cardList]);
 
   return (
     <Dialog open={isOpen} onClose={handleClose}>
@@ -12,7 +26,10 @@ const EditDialog = ({ isOpen, handleClose, cardList, selected }) => {
         label="Title"
         variant="outlined"
         sx={{ m: 1 }}
-        value={card.title}
+        value={currentTitle}
+        onChange={(e) => {
+          setCurrentTitle(e.target.value);
+        }}
       />
       <TextField
         id="outlined-multiline-static"
@@ -20,7 +37,10 @@ const EditDialog = ({ isOpen, handleClose, cardList, selected }) => {
         sx={{ m: 1, minWidth: 300 }}
         multiline
         rows={6}
-        value={card.text}
+        value={currentText}
+        onChange={(e) => {
+          setCurrentText(e.target.value);
+        }}
       />
       <Button variant="outlined" sx={{ maxWidth: 100, m: 1 }}>
         Add

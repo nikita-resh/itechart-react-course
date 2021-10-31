@@ -11,6 +11,15 @@ const EditDialog = ({
 }) => {
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentText, setCurrentText] = useState("");
+  const [isFilled, setIsFilled] = useState(false);
+
+  useEffect(() => {
+    if (!currentTitle?.trim() || !currentText?.trim()) {
+      setIsFilled(false);
+    } else {
+      setIsFilled(true);
+    }
+  }, [currentTitle, currentText]);
 
   useEffect(() => {
     setCurrentTitle(cardList.find((item) => item.id === selected)?.title);
@@ -77,6 +86,7 @@ const EditDialog = ({
           color="success"
           sx={{ maxWidth: 100, m: 1 }}
           onClick={saveChanges}
+          disabled={!isFilled}
         >
           Save
         </Button>

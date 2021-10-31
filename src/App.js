@@ -68,6 +68,7 @@ const App = () => {
         handleClose={handleClose(setIsEditModeOpen)}
         selected={selected}
         cardList={cardList}
+        setCardList={setCardList}
       />
     </ThemeProvider>
   );

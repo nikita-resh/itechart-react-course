@@ -72,7 +72,7 @@ const EditDialog = ({
         }}
       />
 
-      <Box sx={{ justifyContent: "space-between" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
           variant="outlined"
           color="error"
@@ -82,7 +82,7 @@ const EditDialog = ({
           Delete
         </Button>
         <Button
-          variant="contained"
+          variant="outlined"
           color="success"
           sx={{ maxWidth: 100, m: 1 }}
           onClick={saveChanges}

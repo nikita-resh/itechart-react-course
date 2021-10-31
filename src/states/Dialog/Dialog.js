@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Dialog, DialogTitle, TextField, Button } from "@mui/material";
+import { Box } from "@mui/system";
 
 const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   const [title, setTitle] = useState("");
@@ -50,14 +51,16 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
-      <Button
-        variant="outlined"
-        sx={{ maxWidth: 100, m: 1 }}
-        onClick={addCard}
-        disabled={!isFilled}
-      >
-        Add
-      </Button>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="outlined"
+          sx={{ maxWidth: 100, m: 1 }}
+          onClick={addCard}
+          disabled={!isFilled}
+        >
+          Add
+        </Button>
+      </Box>
     </Dialog>
   );
 };

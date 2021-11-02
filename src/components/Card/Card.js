@@ -1,19 +1,22 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, IconButton } from "@mui/material";
+import { Edit as EditIcon } from "@mui/icons-material/";
+import "./Card.scss";
 
 const cardStyles = {
   width: 300,
-  height: 200,
+  height: 220,
   mt: 2,
   mr: 2,
+  p: 1,
   border: 1,
   borderColor: "#999999",
   display: "inline-block",
 };
 
-const CustomCard = ({ cardTitle, cardText }) => {
+const CustomCard = ({ cardTitle, cardText, editMode, setSelected, cardId }) => {
   return (
-    <Card sx={cardStyles}>
+    <Card sx={cardStyles} className="card">
       <CardContent>
         <Typography
           variant="span"
@@ -30,6 +33,17 @@ const CustomCard = ({ cardTitle, cardText }) => {
         >
           {cardText}
         </Typography>
+
+        <IconButton
+          aria-label="edit"
+          className="button"
+          onClick={() => {
+            editMode();
+            setSelected(cardId);
+          }}
+        >
+          <EditIcon />
+        </IconButton>
       </CardContent>
     </Card>
   );

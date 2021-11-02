@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 const AddCardStyles = {
-  width: 302,
+  width: 317,
   height: 200,
   border: 1,
   mt: 1.5,

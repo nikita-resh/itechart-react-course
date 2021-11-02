@@ -14,16 +14,13 @@ const EditDialog = ({
   const [isFilled, setIsFilled] = useState(false);
 
   useEffect(() => {
-    if (!currentTitle?.trim() || !currentText?.trim()) {
-      setIsFilled(false);
-    } else {
-      setIsFilled(true);
-    }
+    setIsFilled(!!currentTitle?.trim() && !!currentText?.trim());
   }, [currentTitle, currentText]);
 
   useEffect(() => {
-    setCurrentTitle(cardList.find((item) => item.id === selected)?.title);
-    setCurrentText(cardList.find((item) => item.id === selected)?.text);
+    const card = cardList.find((item) => item.id === selected);
+    setCurrentTitle(card?.title);
+    setCurrentText(card?.text);
   }, [selected, cardList, isOpen]);
 
   const saveChanges = () => {

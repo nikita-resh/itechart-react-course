@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import axios from "../../axios/axios";
+import requestInstance from "../../requestInstance/requestInstance";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import ViewComfyIcon from "@mui/icons-material/ViewComfy";
 
@@ -9,7 +9,7 @@ const iconStyles = { mr: 2 };
 const Header = ({ cardList, setCardList }) => {
   const handleAdd = async () => {
     const randNum = Math.ceil(Math.random() * 100);
-    const { data: card } = await axios.get(`/posts/${randNum}`);
+    const { data: card } = await requestInstance.get(`/posts/${randNum}`);
     const { title, body: text } = card;
     setCardList([...cardList, { id: uuidv4(), title, text }]);
   };

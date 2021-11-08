@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../axios/axios";
+import requestInstance from "../../requestInstance/requestInstance";
 import { v4 as uuidv4 } from "uuid";
 import { Dialog, DialogTitle, TextField, Button } from "@mui/material";
 import { Box } from "@mui/system";
@@ -23,7 +23,7 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   };
 
   const postCard = (card) => {
-    axios
+    requestInstance
       .post("/posts", {
         userId: 1,
         id: 101,

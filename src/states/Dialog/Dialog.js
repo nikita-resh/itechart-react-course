@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import requestInstance from "../../requestInstance/requestInstance";
 import { v4 as uuidv4 } from "uuid";
 import { Dialog, DialogTitle, TextField, Button } from "@mui/material";
+import postCard from "../../controllers/postCard";
 import { Box } from "@mui/system";
 
 const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
@@ -20,18 +20,6 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
     postCard(newCard);
     cleanForm();
     handleClose();
-  };
-
-  const postCard = (card) => {
-    requestInstance
-      .post("/posts", {
-        userId: 1,
-        id: 101,
-        title: card.title,
-        body: card.text,
-      })
-      .then((res) => console.log("Request status: ", res.status))
-      .catch((e) => console.log(e.message));
   };
 
   useEffect(() => {

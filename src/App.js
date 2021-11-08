@@ -50,7 +50,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
+      <Header cardList={cardList} setCardList={setCardList} />
       <Cards
         cardList={cardList}
         editMode={handleClickOpen(setIsEditModeOpen)}

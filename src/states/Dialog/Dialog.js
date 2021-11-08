@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "../../axios/axios";
 import { v4 as uuidv4 } from "uuid";
 import { Dialog, DialogTitle, TextField, Button } from "@mui/material";
 import { Box } from "@mui/system";
@@ -14,9 +15,23 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   };
 
   const addCard = () => {
-    setCardList([...cardList, { id: uuidv4(), title, text: content }]);
+    const newCard = { id: uuidv4(), title, text: content };
+    setCardList([...cardList, newCard]);
+    postCard(newCard);
     cleanForm();
     handleClose();
+  };
+
+  const postCard = (card) => {
+    axios
+      .post("/posts", {
+        userId: 1,
+        id: 101,
+        title: card.title,
+        body: card.text,
+      })
+      .then((res) => console.log("Request status: ", res.status))
+      .catch((e) => console.log(e.message));
   };
 
   useEffect(() => {

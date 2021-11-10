@@ -1,7 +1,7 @@
-import requestInstance from "../requestInstance/requestInstance";
+import httpClient from "../httpClient/httpClient";
 
 const postCard = async (card) => {
-  requestInstance
+  httpClient
     .post("/posts", {
       userId: 1,
       id: 101,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { v4 as uuidv4 } from "uuid";
-import Header from "./components/Header/Header";
+import Header from "./states/Header/Header";
 import Cards from "./states/Cards/Cards";
 import AddCard from "./components/AddCard/AddCard";
 import Dialog from "./states/Dialog/Dialog";

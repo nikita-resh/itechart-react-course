@@ -13,9 +13,7 @@ const Header = ({ cardList, setCardList }) => {
   const handleAddClick = async () => {
     const n = num || Math.ceil(100 * Math.random());
     try {
-      const card = await apiClient()
-        .cards.get(n)
-        .then((res) => res.data);
+      const card = await apiClient.cards.get(n).then((res) => res.data);
       addCard(card);
     } catch (e) {
       console.log(e.message);

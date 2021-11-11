@@ -17,8 +17,8 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   const addCard = () => {
     const newCard = { id: uuidv4(), title, text: content };
     setCardList([...cardList, newCard]);
-    apiClient()
-      .cards.post(newCard)
+    apiClient.cards
+      .create(newCard)
       .then((res) => console.log(res.status))
       .catch((e) => console.log(e.message));
     cleanForm();

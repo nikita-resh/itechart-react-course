@@ -1,10 +1,12 @@
 import httpClient from "../httpClient/httpClient";
 
-export function apiClient() {
+function initApiClient() {
   return {
     cards: {
       get: (id) => httpClient.get(`/posts/${id}`),
-      post: (card) => httpClient.post(`/posts`, card),
+      create: (card) => httpClient.post(`/posts`, card),
     },
   };
 }
+
+export const apiClient = initApiClient();

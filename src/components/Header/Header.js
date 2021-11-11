@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import getCard from "../../controllers/getCard";
+import { getCard } from "../../controllers/card";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import ViewComfyIcon from "@mui/icons-material/ViewComfy";
 

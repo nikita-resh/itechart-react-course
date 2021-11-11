@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Dialog, DialogTitle, TextField, Button } from "@mui/material";
-import { postCard } from "../../controllers/card";
+import { apiClient } from "../../apiClient/apiClient";
 import { Box } from "@mui/system";
 
 const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
@@ -17,7 +17,10 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   const addCard = () => {
     const newCard = { id: uuidv4(), title, text: content };
     setCardList([...cardList, newCard]);
-    postCard(newCard);
+    apiClient()
+      .cards.post(newCard)
+      .then((res) => console.log(res.status))
+      .catch((e) => console.log(e.message));
     cleanForm();
     handleClose();
   };

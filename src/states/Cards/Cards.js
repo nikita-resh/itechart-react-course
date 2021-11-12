@@ -7,7 +7,7 @@ const Cards = ({ cardList, editMode, setSelected }) => {
       {cardList.map((card) => (
         <Card
           cardTitle={card.title}
-          cardText={card.text}
+          cardText={card.body}
           key={card.id}
           cardId={card.id}
           editMode={editMode}

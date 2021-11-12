@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { v4 as uuidv4 } from "uuid";
-import Header from "./components/Header/Header";
+import { apiClient } from "./apiClient/apiClient";
+import Header from "./states/Header/Header";
 import Cards from "./states/Cards/Cards";
 import AddCard from "./components/AddCard/AddCard";
 import Dialog from "./states/Dialog/Dialog";
@@ -18,54 +18,42 @@ const App = () => {
   const [isEditModeOpen, setIsEditModeOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  const handleClickOpen = (set) => {
-    return function () {
-      set(true);
-    };
+  const toggleCreateDialog = () => {
+    setIsCreateModeOpen((state) => !state);
   };
 
-  const handleClose = (set) => {
-    return function () {
-      set(false);
-    };
+  const togggleEditDialog = () => {
+    setIsEditModeOpen((state) => !state);
   };
 
-  const [cardList, setCardList] = useState([
-    {
-      id: uuidv4(),
-      title: "Card 1",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, veritatis est iure adipisci, autem dignissimos totam inventore praesentium, ad deserunt quidem ut. Nemo qui incidunt porro rerum. Odit, distinctio incidunt.",
-    },
-    {
-      id: uuidv4(),
-      title: "Card 2",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque tenetur magni neque maxime, quidem magnam autem velit repudiandae illo? Sit ullam eaque tempora ipsum odit dolorum id accusantium suscipit deserunt?",
-    },
-    {
-      id: uuidv4(),
-      title: "Card 3",
-      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam at dolor eveniet, deleniti animi molestias aliquid minus natus consequatur obcaecati nihil, ad repellendus eos minima sint iste tempore expedita delectus!",
-    },
-  ]);
+  const [cardList, setCardList] = useState([]);
+
+  useEffect(() => {
+    apiClient.cards
+      .getAll()
+      .then((res) => res.data)
+      .then((cards) => setCardList(cards.slice(0, 10)))
+      .catch((e) => console.log(e.message));
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
+      <Header cardList={cardList} setCardList={setCardList} />
       <Cards
         cardList={cardList}
-        editMode={handleClickOpen(setIsEditModeOpen)}
+        editMode={togggleEditDialog}
         setSelected={setSelected}
       />
-      <AddCard handleClickOpen={handleClickOpen(setIsCreateModeOpen)} />
+      <AddCard handleClickOpen={toggleCreateDialog} />
       <Dialog
-        handleClose={handleClose(setIsCreateModeOpen)}
+        handleClose={toggleCreateDialog}
         isOpen={isCreateModeOpen}
         cardList={cardList}
         setCardList={setCardList}
       />
       <EditDialog
         isOpen={isEditModeOpen}
-        handleClose={handleClose(setIsEditModeOpen)}
+        handleClose={togggleEditDialog}
         selected={selected}
         cardList={cardList}
         setCardList={setCardList}

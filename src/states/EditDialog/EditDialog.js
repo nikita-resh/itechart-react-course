@@ -20,7 +20,7 @@ const EditDialog = ({
   useEffect(() => {
     const card = cardList.find((item) => item.id === selected);
     setCurrentTitle(card?.title);
-    setCurrentText(card?.text);
+    setCurrentText(card?.body);
   }, [selected, cardList, isOpen]);
 
   const saveChanges = () => {
@@ -29,7 +29,7 @@ const EditDialog = ({
         return {
           ...item,
           title: currentTitle,
-          text: currentText,
+          body: currentText,
         };
       }
       return item;

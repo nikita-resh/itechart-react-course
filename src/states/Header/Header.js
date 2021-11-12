@@ -21,8 +21,7 @@ const Header = ({ cardList, setCardList }) => {
   };
 
   const addCard = (card) => {
-    const { title, body: text } = card;
-    setCardList([...cardList, { id: uuidv4(), title, text }]);
+    setCardList([...cardList, { id: uuidv4(), ...card }]);
   };
 
   const handleChange = (value) => {

@@ -18,16 +18,12 @@ const App = () => {
   const [isEditModeOpen, setIsEditModeOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  const handleClickOpen = (set) => {
-    return function () {
-      set(true);
-    };
+  const toggleCreateDialog = () => {
+    setIsCreateModeOpen((state) => !state);
   };
 
-  const handleClose = (set) => {
-    return function () {
-      set(false);
-    };
+  const togggleEditDialog = () => {
+    setIsEditModeOpen((state) => !state);
   };
 
   const [cardList, setCardList] = useState([]);
@@ -45,19 +41,19 @@ const App = () => {
       <Header cardList={cardList} setCardList={setCardList} />
       <Cards
         cardList={cardList}
-        editMode={handleClickOpen(setIsEditModeOpen)}
+        editMode={togggleEditDialog}
         setSelected={setSelected}
       />
-      <AddCard handleClickOpen={handleClickOpen(setIsCreateModeOpen)} />
+      <AddCard handleClickOpen={toggleCreateDialog} />
       <Dialog
-        handleClose={handleClose(setIsCreateModeOpen)}
+        handleClose={toggleCreateDialog}
         isOpen={isCreateModeOpen}
         cardList={cardList}
         setCardList={setCardList}
       />
       <EditDialog
         isOpen={isEditModeOpen}
-        handleClose={handleClose(setIsEditModeOpen)}
+        handleClose={togggleEditDialog}
         selected={selected}
         cardList={cardList}
         setCardList={setCardList}

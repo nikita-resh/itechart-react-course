@@ -15,7 +15,7 @@ const CustomDialog = ({ isOpen, handleClose, cardList, setCardList }) => {
   };
 
   const addCard = () => {
-    const newCard = { id: uuidv4(), title, text: content };
+    const newCard = { id: uuidv4(), title, body: content };
     setCardList([...cardList, newCard]);
     apiClient.cards
       .create(newCard)

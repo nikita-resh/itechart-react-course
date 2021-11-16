@@ -12,7 +12,11 @@ import "./SideBar.scss";
 
 const SideBar = ({ isSideBarOpen, toggleSideBar }) => (
   <Fragment>
-    <SwipeableDrawer open={isSideBarOpen} onClose={toggleSideBar}>
+    <SwipeableDrawer
+      open={isSideBarOpen}
+      onClose={toggleSideBar}
+      onOpen={toggleSideBar}
+    >
       <NavLink to="/main">
         <List>
           <ListItem button>

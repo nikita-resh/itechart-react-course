@@ -28,11 +28,20 @@ const CardsApp = () => {
   const [cardList, setCardList] = useState([]);
 
   useEffect(() => {
+    let isUnmounted = false;
     apiClient.cards
       .getAll()
       .then((res) => res.data)
-      .then((cards) => setCardList(cards.slice(0, 10)))
+      .then((cards) => {
+        if (!isUnmounted) {
+          setCardList(cards.slice(0, 10));
+        }
+      })
       .catch((e) => console.log(e.message));
+
+    return () => {
+      isUnmounted = true;
+    };
   }, []);
 
   return (

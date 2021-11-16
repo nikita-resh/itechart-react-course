@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { apiClient } from "../../apiClient/apiClient";
 import { AppBar, Toolbar, Typography, Button, TextField } from "@mui/material";
@@ -16,6 +16,13 @@ const iconStyles = {
 const Header = ({ cardList, setCardList, toggleSideBar }) => {
   const [num, setNum] = useState();
   const [isValid, setIsValid] = useState(true);
+  let isUnmountedRef = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      isUnmountedRef.current = true;
+    };
+  }, []);
 
   const handleAddClick = async () => {
     const n = num || Math.ceil(100 * Math.random());
@@ -28,7 +35,9 @@ const Header = ({ cardList, setCardList, toggleSideBar }) => {
   };
 
   const addCard = (card) => {
-    setCardList([...cardList, { id: uuidv4(), ...card }]);
+    if (!isUnmountedRef.current) {
+      setCardList([...cardList, { id: uuidv4(), ...card }]);
+    }
   };
 
   const handleChange = (value) => {

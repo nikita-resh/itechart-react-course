@@ -36,7 +36,7 @@ const Header = ({ cardList, setCardList, toggleSideBar }) => {
 
   const addCard = (card) => {
     if (!isUnmountedRef.current) {
-      setCardList([...cardList, { id: uuidv4(), ...card }]);
+      setCardList([...cardList, { ...card, id: uuidv4() }]);
     }
   };
 

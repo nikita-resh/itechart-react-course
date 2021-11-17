@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { apiClient } from "../../apiClient/apiClient";
 import { AppBar, Toolbar, Typography, Button, TextField } from "@mui/material";
-import ViewComfyIcon from "@mui/icons-material/ViewComfy";
+import MenuIcon from "@mui/icons-material/Menu";
 
-const iconStyles = { mr: 2 };
+const iconStyles = {
+  mr: 2,
+  "&:hover": {
+    opacity: "0.5",
+    cursor: "pointer",
+    transition: "all .3s ease-in-out",
+  },
+};
 
-const Header = ({ cardList, setCardList }) => {
+const Header = ({ cardList, setCardList, toggleSideBar }) => {
   const [num, setNum] = useState();
   const [isValid, setIsValid] = useState(true);
+  const isUnmountedRef = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      isUnmountedRef.current = true;
+    };
+  }, []);
 
   const handleAddClick = async () => {
     const n = num || Math.ceil(100 * Math.random());
@@ -21,7 +35,9 @@ const Header = ({ cardList, setCardList }) => {
   };
 
   const addCard = (card) => {
-    setCardList([...cardList, { id: uuidv4(), ...card }]);
+    if (!isUnmountedRef.current) {
+      setCardList([...cardList, { ...card, id: uuidv4() }]);
+    }
   };
 
   const handleChange = (value) => {
@@ -32,7 +48,7 @@ const Header = ({ cardList, setCardList }) => {
   return (
     <AppBar position="relative">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <ViewComfyIcon fontSize="large" sx={iconStyles} />
+        <MenuIcon fontSize="large" sx={iconStyles} onClick={toggleSideBar} />
         <Typography variant="h4" component="h1">
           iTechArt react course
         </Typography>

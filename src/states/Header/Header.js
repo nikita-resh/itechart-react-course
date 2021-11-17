@@ -16,7 +16,7 @@ const iconStyles = {
 const Header = ({ cardList, setCardList, toggleSideBar }) => {
   const [num, setNum] = useState();
   const [isValid, setIsValid] = useState(true);
-  let isUnmountedRef = useRef(false);
+  const isUnmountedRef = useRef(false);
 
   useEffect(() => {
     return () => {
@@ -48,11 +48,7 @@ const Header = ({ cardList, setCardList, toggleSideBar }) => {
   return (
     <AppBar position="relative">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <MenuIcon
-          fontSize="large"
-          sx={iconStyles}
-          onClick={() => toggleSideBar()}
-        />
+        <MenuIcon fontSize="large" sx={iconStyles} onClick={toggleSideBar} />
         <Typography variant="h4" component="h1">
           iTechArt react course
         </Typography>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
+import { Route, Switch } from "react-router-dom";
 import { apiClient } from "../../apiClient/apiClient";
 import Header from "../Header/Header";
 import Cards from "../Cards/Cards";
@@ -6,6 +7,8 @@ import AddCard from "../../components/AddCard/AddCard";
 import Dialog from "../Dialog/Dialog";
 import EditDialog from "../EditDialog/EditDialog";
 import SideBar from "../../components/SideBar/SideBar";
+import Tabs from "../../components/Tabs/Tabs";
+import { ParticularCard } from "../../components/Card/Card";
 
 const CardsApp = () => {
   const [isCreateModeOpen, setIsCreateModeOpen] = useState(false);
@@ -26,6 +29,8 @@ const CardsApp = () => {
   };
 
   const [cardList, setCardList] = useState([]);
+
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     let isUnmounted = false;
@@ -51,12 +56,24 @@ const CardsApp = () => {
         setCardList={setCardList}
         toggleSideBar={toggleSideBar}
       />
+      <Tabs cards={cardList} value={value} setValue={setValue} />
+      <Switch>
+        <Route path={"/cards/:id"}>
+          <ParticularCard
+            cardList={cardList}
+            editMode={togggleEditDialog}
+            setSelected={setSelected}
+          />
+        </Route>
+        <Route path={"/cards/"}>
+          <Cards
+            cardList={cardList}
+            editMode={togggleEditDialog}
+            setSelected={setSelected}
+          />
+        </Route>
+      </Switch>
       <SideBar isSideBarOpen={isSideBarOpen} toggleSideBar={toggleSideBar} />
-      <Cards
-        cardList={cardList}
-        editMode={togggleEditDialog}
-        setSelected={setSelected}
-      />
       <AddCard handleClickOpen={toggleCreateDialog} />
       <Dialog
         handleClose={toggleCreateDialog}

@@ -7,7 +7,7 @@ import AddCard from "../../components/AddCard/AddCard";
 import Dialog from "../Dialog/Dialog";
 import EditDialog from "../EditDialog/EditDialog";
 import SideBar from "../../components/SideBar/SideBar";
-import Tabs from "../../components/Tabs/Tabs";
+import Tabs from "../Tabs/Tabs";
 import { ParticularCard } from "../../components/Card/Card";
 
 const CardsApp = () => {
@@ -29,8 +29,6 @@ const CardsApp = () => {
   };
 
   const [cardList, setCardList] = useState([]);
-
-  const [value, setValue] = useState(0);
 
   useEffect(() => {
     let isUnmounted = false;
@@ -56,7 +54,7 @@ const CardsApp = () => {
         setCardList={setCardList}
         toggleSideBar={toggleSideBar}
       />
-      <Tabs cards={cardList} value={value} setValue={setValue} />
+      <Tabs cards={cardList} />
       <Switch>
         <Route path={"/cards/:id"}>
           <ParticularCard
@@ -65,7 +63,7 @@ const CardsApp = () => {
             setSelected={setSelected}
           />
         </Route>
-        <Route path={"/cards/"}>
+        <Route path={"/cards"}>
           <Cards
             cardList={cardList}
             editMode={togggleEditDialog}

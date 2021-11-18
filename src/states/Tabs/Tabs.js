@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Box, Tabs, Tab } from "@mui/material";
 import "./Tabs.scss";
@@ -7,10 +7,12 @@ function LinkTab(props) {
   return <Tab component={NavLink} {...props} />;
 }
 
-const CustomTabs = ({ cards, value, setValue }) => {
+const CustomTabs = ({ cards }) => {
+  const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <Box sx={{ mt: 1, pl: 0 }}>
       <Box>

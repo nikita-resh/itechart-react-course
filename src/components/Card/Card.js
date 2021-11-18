@@ -53,7 +53,7 @@ const CustomCard = ({ cardTitle, cardText, editMode, setSelected, cardId }) => {
 export const ParticularCard = ({ cardList, editMode, setSelected }) => {
   const params = useParams();
   const id = params.id;
-  const card = cardList[id - 1];
+  const card = cardList.find((item) => item.id === id);
   return (
     <CustomCard
       cardTitle={card?.title}

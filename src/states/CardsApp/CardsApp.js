@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { apiClient } from "../../apiClient/apiClient";
 import Header from "../Header/Header";
 import Cards from "../Cards/Cards";
@@ -37,7 +38,11 @@ const CardsApp = () => {
       .then((res) => res.data)
       .then((cards) => {
         if (!isUnmounted) {
-          setCardList(cards.slice(0, 10));
+          setCardList(
+            cards.slice(0, 10).map((item) => {
+              return { ...item, id: uuidv4() };
+            })
+          );
         }
       })
       .catch((e) => console.log(e.message));

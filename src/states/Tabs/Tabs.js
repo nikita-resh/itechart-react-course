@@ -25,11 +25,11 @@ const CustomTabs = ({ cards }) => {
           <LinkTab to="/cards" label="All cards" className="black" value={0} />
           {cards.map((item, index) => (
             <LinkTab
-              to={`/cards/${index + 1}`}
+              to={`/cards/${item.id}`}
               label={`Card ${index + 1}`}
               className="black"
               key={item.id}
-              value={index + 1}
+              value={item.id}
             />
           ))}
         </Tabs>

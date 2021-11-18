@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Card, CardContent, Typography, IconButton } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material/";
 import "./Card.scss";
@@ -46,6 +47,22 @@ const CustomCard = ({ cardTitle, cardText, editMode, setSelected, cardId }) => {
         </IconButton>
       </CardContent>
     </Card>
+  );
+};
+
+export const ParticularCard = ({ cardList, editMode, setSelected }) => {
+  const params = useParams();
+  const id = params.id;
+  const card = cardList.find((item) => item.id === id);
+  return (
+    <CustomCard
+      cardTitle={card?.title}
+      cardText={card?.body}
+      key={card?.id}
+      cardId={card?.id}
+      editMode={editMode}
+      setSelected={setSelected}
+    />
   );
 };
 

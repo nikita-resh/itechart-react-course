@@ -1,4 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
+import { Route, Switch } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { apiClient } from "../../apiClient/apiClient";
 import Header from "../Header/Header";
 import Cards from "../Cards/Cards";
@@ -6,6 +8,8 @@ import AddCard from "../../components/AddCard/AddCard";
 import Dialog from "../Dialog/Dialog";
 import EditDialog from "../EditDialog/EditDialog";
 import SideBar from "../../components/SideBar/SideBar";
+import Tabs from "../Tabs/Tabs";
+import { ParticularCard } from "../../components/Card/Card";
 
 const CardsApp = () => {
   const [isCreateModeOpen, setIsCreateModeOpen] = useState(false);
@@ -34,7 +38,11 @@ const CardsApp = () => {
       .then((res) => res.data)
       .then((cards) => {
         if (!isUnmounted) {
-          setCardList(cards.slice(0, 10));
+          setCardList(
+            cards.slice(0, 10).map((item) => {
+              return { ...item, id: uuidv4() };
+            })
+          );
         }
       })
       .catch((e) => console.log(e.message));
@@ -51,12 +59,24 @@ const CardsApp = () => {
         setCardList={setCardList}
         toggleSideBar={toggleSideBar}
       />
+      <Tabs cards={cardList} />
+      <Switch>
+        <Route path={"/cards/:id"}>
+          <ParticularCard
+            cardList={cardList}
+            editMode={togggleEditDialog}
+            setSelected={setSelected}
+          />
+        </Route>
+        <Route path={"/cards"}>
+          <Cards
+            cardList={cardList}
+            editMode={togggleEditDialog}
+            setSelected={setSelected}
+          />
+        </Route>
+      </Switch>
       <SideBar isSideBarOpen={isSideBarOpen} toggleSideBar={toggleSideBar} />
-      <Cards
-        cardList={cardList}
-        editMode={togggleEditDialog}
-        setSelected={setSelected}
-      />
       <AddCard handleClickOpen={toggleCreateDialog} />
       <Dialog
         handleClose={toggleCreateDialog}
